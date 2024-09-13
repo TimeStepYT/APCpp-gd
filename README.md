@@ -1,3 +1,6 @@
+# APCpp-gd
+This is a fork of APCpp made specifically for the ArchipelagoGD mod. The original library was made by [N00byKing](https://github.com/N00byKing/) and the original README is below this section.
+
 # APCpp
 C++ Library for Clients interfacing with the [Archipelago Multi-Game Randomizer](https://archipelago.gg)
 
