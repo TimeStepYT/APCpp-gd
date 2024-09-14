@@ -4,4 +4,3 @@
 [submodule "IXWebSocket"]
 	path = IXWebSocket
 	url = https://github.com/machinezone/IXWebSocket
-	branch = master
