@@ -23,7 +23,7 @@ if (WIN32 AND USE_TLS)
     set(MBEDTLS_LIBRARY mbedtls)
     set(MBEDX509_LIBRARY mbedx509)
     set(MBEDCRYPTO_LIBRARY mbedcrypto)
-    add_subdirectory(${CMAKE_BINARY_DIR}/mbedtls-3.4.0 mbedtls_bin)
+    add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/mbedtls-3.4.0 mbedtls_bin)
 endif (WIN32 AND USE_TLS)
 
 set(IXWEBSOCKET_INSTALL OFF CACHE BOOL "" FORCE)
