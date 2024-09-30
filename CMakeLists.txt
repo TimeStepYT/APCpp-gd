@@ -4,6 +4,10 @@ project(APCpp)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# for building with the geode action
+set(USE_MBED_TLS ON)
+set(CMAKE_C_SIMULATE_ID "Clang")
+
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 add_library(APCpp STATIC Archipelago.cpp Archipelago.h)
@@ -17,13 +21,8 @@ set(USE_TLS ON CACHE BOOL "Enable TLS support" FORCE)
 if (WIN32 AND USE_TLS)
     # geode embeds cpm
     CPMAddPackage("gh:Mbed-TLS/mbedtls@3.6.1")
-    target_link_libraries(${PROJECT_NAME} mbedtls)
-    set(USE_STATIC_MBEDTLS_LIBRARY ON CACHE BOOL "" FORCE)
-    set(MBEDTLS_INCLUDE_DIRS ${mbedtls_SOURCE_DIR}/include)
-    set(MBEDTLS_VERSION_GREATER_THAN_3 ${MBEDTLS_INCLUDE_DIRS})
-    set(MBEDTLS_LIBRARY mbedtls)
-    set(MBEDX509_LIBRARY mbedx509)
-    set(MBEDCRYPTO_LIBRARY mbedcrypto)
+    target_link_libraries(${PROJECT_NAME} MbedTLS::mbedtls)
+
     target_include_directories(${PROJECT_NAME} PUBLIC ${mbedtls_SOURCE_DIR}/include)
 endif (WIN32 AND USE_TLS)
 
