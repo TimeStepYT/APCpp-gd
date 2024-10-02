@@ -19,7 +19,7 @@ set(ENABLE_PROGRAMS OFF CACHE BOOL "" FORCE)
 # Enable TLS. On Windows, build mbedTLS
 set(USE_TLS ON CACHE BOOL "Enable TLS support" FORCE)
 if (WIN32 AND USE_TLS)
-    # geode embeds cpm
+    # geode embeds cpm, so we can just do this without much worry
     CPMAddPackage("gh:Mbed-TLS/mbedtls@3.6.1")
     target_link_libraries(${PROJECT_NAME} mbedtls)
     
