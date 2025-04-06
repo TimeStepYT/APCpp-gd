@@ -12,6 +12,9 @@ bool AP_IsInit();
 
 void AP_Start();
 
+// AP_Shutdown resets the library state to before initialization, and doesn't just disconnect!
+void AP_Shutdown();
+
 struct AP_NetworkVersion {
     int major;
     int minor;
@@ -153,7 +156,7 @@ struct AP_RoomInfo {
 
 int AP_GetRoomInfo(AP_RoomInfo*);
 AP_ConnectionStatus AP_GetConnectionStatus();
-int AP_GetUUID();
+std::uint64_t AP_GetUUID();
 int AP_GetPlayerID();
 
 /* Serverside Data Types */
@@ -193,6 +196,13 @@ struct AP_SetReply {
     void* value;
 };
 
+struct AP_Bounce {
+    std::vector<std::string>* games = nullptr; // Can be nullptr or empty, but must be set to either
+    std::vector<std::string>* slots = nullptr; // Can be nullptr or empty, but must be set to either
+    std::vector<std::string>* tags  = nullptr; // Can be nullptr or empty, but must be set to either
+    std::string data; // Valid JSON Data. Can also be primitive (Numbers or literals)
+};
+
 /* Serverside Data Functions */
 
 // Set and Receive Data
@@ -213,3 +223,9 @@ void AP_RegisterSetReplyCallback(void (*f_setreply)(AP_SetReply));
 void AP_SetNotify(std::map<std::string,AP_DataType>);
 // Single Key version of above for convenience
 void AP_SetNotify(std::string, AP_DataType);
+
+// Send Bounce package
+void AP_SendBounce(AP_Bounce);
+
+// Receive Bounced packages. Disables automatic DeathLink management
+void AP_RegisterBouncedCallback(void (*f_bounced)(AP_Bounce));
